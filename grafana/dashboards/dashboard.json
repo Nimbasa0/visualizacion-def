@@ -1,0 +1,118 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "description": "DESCRIPCION_1",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "autoPlay": true,
+        "customBackground": false,
+        "geolocate": false,
+        "iframeURL": "INSERT_URL_1",
+        "loop": true,
+        "videoId": "eQpyJQ2womo",
+        "videoType": "iframe"
+      },
+      "title": "TITULO_1",
+      "type": "innius-video-panel"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "description": "DESCRIPCION_2",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "autoPlay": true,
+        "customBackground": false,
+        "geolocate": false,
+        "iframeURL": "INSERT_URL_2",
+        "loop": true,
+        "videoId": "eQpyJQ2womo",
+        "videoType": "iframe"
+      },
+      "title": "TITULO_2",
+      "type": "innius-video-panel"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "description": "DESCRIPCION_3",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 6,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "autoPlay": true,
+        "customBackground": false,
+        "geolocate": false,
+        "iframeURL": "INSERT_URL_3",
+        "loop": true,
+        "videoId": "eQpyJQ2womo",
+        "videoType": "iframe"
+      },
+      "title": "TITULO_3",
+      "type": "innius-video-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "PRUEBAAAA",
+  "uid": "b303f51a-4216-43f3-a57d-0e0d4e9a42bb",
+  "version": 3,
+  "weekStart": ""
+}

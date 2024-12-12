@@ -1,0 +1,118 @@
+version: '3.9'
+
+services:
+  python:
+    build:
+      context: ./productor
+      dockerfile: Dockerfile
+    depends_on:
+      - broker
+    volumes:
+      - ./productor/scripts:/scripts 
+    command: python productor.py
+    networks:
+      - link
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+  
+  python2:
+    build:
+      context: ./python2
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    depends_on:
+      - broker
+      - rtsp-server
+    volumes:
+      - ./python2/scripts:/scripts
+    command: python pruebita.py
+    networks:
+      - link
+
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.1
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - link
+  
+  broker:
+    image: confluentinc/cp-kafka:7.6.1
+    hostname: broker
+    container_name: broker
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9101:9101"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_JMX_PORT: 9101
+      KAFKA_JMX_HOSTNAME: localhost
+    networks:
+      - link
+
+  rtsp-server:
+    image: bluenviron/mediamtx:latest
+    container_name: rtsp-server
+    restart: unless-stopped
+    ports:
+      - "8554:8554"
+      - "1935:1935"
+      - "8888:8888"
+    volumes:
+      - ./mediamtx.yml:/mediamtx.yml
+    networks:
+      - link 
+
+  go2rtc:
+    image: alexxit/go2rtc
+    container_name: go2rtc
+    ports:
+      - "1984:1984" # Mapea el puerto 1984 del host al contenedor
+    volumes:
+      # Monta el archivo de configuración desde el host al contenedor
+      - C:/Users/zcami/Desktop/grafana-livecamera-rtsp-webrtc-main/go2rtc-config/go2rtc.yaml:/config/config.yaml
+    restart: unless-stopped # Reinicia el contenedor automáticamente en caso de fallo
+    networks:
+      - link 
+
+  grafana:
+    build: './grafana'
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana/data
+    ports:
+      - "3000:3000" 
+    networks:
+      - link 
+volumes:
+  grafana_data: {}
+ 
+
+networks:
+  link:
+    driver: bridge

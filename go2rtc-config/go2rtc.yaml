@@ -1,0 +1,8 @@
+# https://github.com/AlexxIT/go2rtc#module-api for other configuration examples
+# Example
+streams:
+    dahue:
+        - 'rtsp://admin:test1122@129.222.172.5:554/Streaming/Channels/101'
+    dahua:
+        - 'rtsp://admin:test1122@129.222.172.5:554/Streaming/Channels/102'
+
