@@ -77,7 +77,7 @@
         "type": "datasource",
         "uid": "grafana"
       },
-      "description": "Transmisión RTSP cámara 3",
+      "description": "Transmisión RTSP cámara 3 IA",
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -89,12 +89,12 @@
         "autoPlay": true,
         "customBackground": false,
         "geolocate": false,
-        "iframeURL": "http://172.16.96.103:1984/api/stream.mp4?src=dahue&mp4=flac",
+        "iframeURL": "http://172.16.96.103:1984/api/stream.mp4?src=dahui&mp4=flac",
         "loop": true,
         "videoId": "eQpyJQ2womo",
         "videoType": "iframe"
       },
-      "title": "Transmisión 3",
+      "title": "Transmisión 3 IA",
       "type": "innius-video-panel"
     }
   ],
