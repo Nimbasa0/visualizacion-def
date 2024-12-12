@@ -107,6 +107,8 @@ services:
       - grafana_data:/var/lib/grafana/data
     ports:
       - "3000:3000" 
+    environment:
+      - GF_INSTALL_PLUGINS=innius-video-panel
     networks:
       - link 
 volumes:
