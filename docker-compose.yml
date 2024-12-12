@@ -95,7 +95,7 @@ services:
       - "1984:1984" # Mapea el puerto 1984 del host al contenedor
     volumes:
       # Monta el archivo de configuración desde el host al contenedor
-      - C:/Users/zcami/Desktop/grafana-livecamera-rtsp-webrtc-main/go2rtc-config/go2rtc.yaml:/config/config.yaml
+      - ./go2rtc-config/go2rtc.yaml:/config/go2rtc.yaml
     restart: unless-stopped # Reinicia el contenedor automáticamente en caso de fallo
     networks:
       - link 
